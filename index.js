@@ -40,7 +40,7 @@ const connectWithRetry = () => {
 };
 
 connectWithRetry();
-
+app.enable("trust proxy")
 app.use(session({
   store: new RedisStore({client: redisClient}),
   secret: SESSION_SECRET,
@@ -54,8 +54,9 @@ app.use(session({
 }))
 
 app.use(express.json());
-app.get("/", (req, res) => {
+app.get("/api/v1", (req, res) => {
   res.send("<h2>Hi There</h2>");
+  console.log("yeah it ran")
 });
 //localhost:3000/api/v1/post/
 app.use("/api/v1/posts", postRouter);
